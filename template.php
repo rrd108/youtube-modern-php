@@ -29,6 +29,9 @@
               <span><i class="fas fa-heart"></i><?= round($votes / $totalVotes * 100) ?>%</span>
             </li>
           <?php endforeach; ?>
+          <li>
+            <input type="text" name="new-option" placeholder="saját válasz hozzáadása">
+          </li>
         </ul>
         <input type="submit" value="Szavazok">
       </form>
