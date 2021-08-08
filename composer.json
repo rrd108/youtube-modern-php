@@ -1,0 +1,19 @@
+{
+    "name": "rrd108/modern-php",
+    "description": "Example PHP app for webmania youtube channel",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Rrd108\\ModernPhp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "rrd108",
+            "email": "rrd@1108.cc"
+        }
+    ],
+    "require": {
+        "waavi/sanitizer": "^1.0"
+    }
+}
