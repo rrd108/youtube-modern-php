@@ -17,7 +17,12 @@ $totalVotes = array_sum($data['answers']);
 
 // jött-e új option
 if ($_POST['new-option']) {
-    $data['answers'][$_POST['new-option']] = 1;
+    /**
+     * TODO lehetséges problémák
+     *      brute force
+     *      káromkodás szűrés
+     *      hülyeség szűrő
+     */
     $filters = [
         'new-option'    =>  'trim|escape|capitalize',
     ];
