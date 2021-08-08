@@ -1,5 +1,7 @@
 <?php
+use \Waavi\Sanitizer\Sanitizer;
 
+require './vendor/autoload.php';
 require './functions.php';
 
 //$dayOfYear = date('z') + 1;   // TODO amint van minden napra kérdés ezt cseréljük vissza
@@ -16,6 +18,12 @@ $totalVotes = array_sum($data['answers']);
 // jött-e új option
 if ($_POST['new-option']) {
     $data['answers'][$_POST['new-option']] = 1;
+    $filters = [
+        'new-option'    =>  'trim|escape|capitalize',
+    ];
+    $sanitizer  = new Sanitizer($_POST, $filters);
+    $newOption = $sanitizer->sanitize();
+    $data['answers'][$newOption['new-option']] = 1;
     saveVotes($dayOfYear, $data);
 }
 
