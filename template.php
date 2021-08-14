@@ -26,7 +26,7 @@
               <label>
                 <input type="radio" name="vote" value="<?= $answer ?>"><?= $answer ?>
               </label>
-              <span><i class="fas fa-heart"></i><?= round($votes / $totalVotes * 100) ?>%</span>
+              <span><i class="fas fa-heart"></i><?= calculatePercent($totalVotes, $votes) ?>%</span>
             </li>
           <?php endforeach; ?>
           <li>
