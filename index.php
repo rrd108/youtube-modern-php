@@ -17,6 +17,7 @@ $totalVotes = array_sum($data['answers']);
 if ($_POST['new-option']) {
     /**
      * TODO lehetséges problémák
+     *      bug: felülírás
      *      brute force
      *      káromkodás szűrés
      *      hülyeség szűrő
