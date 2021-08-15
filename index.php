@@ -23,10 +23,9 @@ if ($_POST['new-option']) {
      */
     
     $sanitizer  = new Sanitizer($_POST, ['new-option' => 'trim|escape|capitalize']);
-    ];
-    $sanitizer  = new Sanitizer($_POST, $filters);
+    $cleanedPost = $sanitizer->sanitize();
+    $data['answers'][$cleanedPost['new-option']] = 1;
     $newOption = $sanitizer->sanitize();
-    $data['answers'][$newOption['new-option']] = 1;
     saveVotes($dayOfYear, $data);
 }
 
