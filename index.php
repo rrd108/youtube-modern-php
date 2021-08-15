@@ -6,13 +6,11 @@ require './functions.php';
 
 //$dayOfYear = date('z') + 1;   // TODO amint van minden napra kérdés ezt cseréljük vissza
 $dayOfYear = 213;
-$data = json_decode(file_get_contents('./' . $dayOfYear . '.json'));
+$data = json_decode(
+    file_get_contents('./' . $dayOfYear . '.json'),
+    true
+);
 
-
-// a $data->answers-t tömbbé alakítjuk
-$answers = (array) $data->answers;
-$data = (array) $data;
-$data['answers'] = $answers;
 $totalVotes = array_sum($data['answers']);
 
 // jött-e új option
