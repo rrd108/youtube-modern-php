@@ -5,6 +5,16 @@
   --opt3: #04724d;
   --opt4: #35ce8d;
   --opt5: #262a10;
+  --rank1: #dc143c;
+  --rank2: #e91640;
+  --rank3: #eb2d53;
+  --rank4: #ee4466;
+  --rank5: #f05c79;
+  --rank6: #f2738c;
+  --rank7: #f48aa0;
+  --rank8: #f6a2b3;
+  --rank9: #f8b9c6;
+  --rank10: #fbd0d9;
 }
 * {
   margin: 0;
@@ -51,33 +61,23 @@ li {
 li:nth-child(1) {
   border-left-color: var(--opt1);
 }
-li:nth-child(1) i {
-  color: var(--opt1);
-}
+
 li:nth-child(2) {
   border-left-color: var(--opt2);
 }
-li:nth-child(2) i {
-  color: var(--opt2);
-}
+
 li:nth-child(3) {
   border-left-color: var(--opt3);
 }
-li:nth-child(3) i {
-  color: var(--opt3);
-}
+
 li:nth-child(4) {
   border-left-color: var(--opt4);
 }
-li:nth-child(4) i {
-  color: var(--opt4);
-}
+
 li:nth-child(5) {
   border-left-color: var(--opt5);
 }
-li:nth-child(5) i {
-  color: var(--opt5);
-}
+
 label {
   width: 70%;
 }
