@@ -26,7 +26,7 @@ if ($_POST['new-option']) {
     $sanitizer  = new Sanitizer($_POST, ['new-option' => 'trim|escape|capitalize']);
     $cleanedPost = $sanitizer->sanitize();
     $data['answers'][$cleanedPost['new-option']] = 1;
-    $newOption = $sanitizer->sanitize();
+    $totalVotes++;
     saveVotes($dayOfYear, $data);
 }
 
@@ -34,6 +34,7 @@ if ($_POST['vote']) {
     if (in_array($_POST['vote'], array_keys($data['answers']))) {
         // növeljük a kiválasztott választ 1-gyel
         $data['answers'][$_POST['vote']]++;
+        $totalVotes++;
         saveVotes($dayOfYear, $data);
     }
     // TODO ha olyanra szavazott ami nem létezik akkor loggoljuk a választ és az IP címet és a timestampet
