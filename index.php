@@ -21,8 +21,8 @@ if ($_POST['new-option']) {
      *      káromkodás szűrés
      *      hülyeség szűrő
      */
-    $filters = [
-        'new-option'    =>  'trim|escape|capitalize',
+    
+    $sanitizer  = new Sanitizer($_POST, ['new-option' => 'trim|escape|capitalize']);
     ];
     $sanitizer  = new Sanitizer($_POST, $filters);
     $newOption = $sanitizer->sanitize();
