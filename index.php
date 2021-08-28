@@ -1,4 +1,6 @@
 <?php
+
+use Rrd108\ModernPhp\BruteForceChecker;
 use \Waavi\Sanitizer\Sanitizer;
 
 require './vendor/autoload.php';
@@ -18,7 +20,6 @@ if ($_POST['new-option']) {
     /**
      * TODO lehetséges problémák
      *      bug: felülírás
-     *      brute force
      *      káromkodás szűrés
      *      hülyeség szűrő
      */
@@ -31,11 +32,18 @@ if ($_POST['new-option']) {
 }
 
 if ($_POST['vote']) {
-    if (in_array($_POST['vote'], array_keys($data['answers']))) {
-        // növeljük a kiválasztott választ 1-gyel
-        $data['answers'][$_POST['vote']]++;
-        $totalVotes++;
-        saveVotes($dayOfYear, $data);
+    // brute force check
+    $bruteForceChecker = new BruteForceChecker('./' . $dayOfYear . '-votes.csv');
+    $error = $bruteForceChecker->check();
+    $bruteForceChecker->save();
+
+    if (!$error) {
+        if (in_array($_POST['vote'], array_keys($data['answers']))) {
+            // növeljük a kiválasztott választ 1-gyel
+            $data['answers'][$_POST['vote']]++;
+            $totalVotes++;
+            saveVotes($dayOfYear, $data);
+        }
     }
     // TODO ha olyanra szavazott ami nem létezik akkor loggoljuk a választ és az IP címet és a timestampet
 }

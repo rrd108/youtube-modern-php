@@ -110,3 +110,16 @@ input[type=submit]:hover, input[type=submit]:active {
   background-color: var(--opt1);
   cursor: pointer;
 }
+
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 75vw;
+  padding: 1rem;
+  background: hsla(33, 94%, 57%, 1);
+  background: linear-gradient(90deg, hsla(333, 100%, 53%, 1) 0%, hsla(33, 94%, 57%, 1) 100%);
+  font-size: 3rem;
+  border-radius: .5rem;
+}

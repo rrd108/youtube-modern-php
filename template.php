@@ -17,6 +17,11 @@
     <h1><i class="fas fa-comment-dots"></i> VoteR</h1>
   </header>
   <main>
+    
+    <?php if ($error) : ?>
+      <p class="error"><?= $error ?></p>
+    <?php endif; ?>
+
     <section>
       <h2>#<?= $dayOfYear ?> <?= $data['question'] ?>?</h2>
       <form method="POST">
