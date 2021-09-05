@@ -34,7 +34,7 @@ if ($_POST['new-option']) {
 if ($_POST['vote']) {
     // brute force check
     $bruteForceChecker = new BruteForceChecker('./' . $dayOfYear . '-votes.csv');
-    $error = $bruteForceChecker->check();
+    $error = $bruteForceChecker->isUserVotedInDelay();
     $bruteForceChecker->save();
 
     if (!$error) {

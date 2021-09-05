@@ -4,10 +4,10 @@ namespace Rrd108\ModernPhp;
 
 class BruteForceChecker
 {
-    private $delay;
-    private $fileName;
+    private int $delay;
+    private string $fileName;
 
-    public function __construct($fileName, $delay = 20*60)
+    public function __construct(string $fileName, int $delay = 20*60)
     {
         $this->delay = $delay;
         $this->fileName = $fileName;
@@ -21,8 +21,9 @@ class BruteForceChecker
         fclose($fp);
     }
 
-    public function check()
+    public function isUserVotedInDelay(): bool
     {
+        $error = false;
         $lines = file($this->fileName);
         $lines = array_reverse($lines);
         foreach ($lines as $line) {
