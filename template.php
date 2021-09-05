@@ -19,7 +19,7 @@
   <main>
     
     <?php if ($error) : ?>
-      <p class="error"><?= $error ?></p>
+      <p class="error">Jelenleg nem tudsz új szavazatot leadni, kérlek próbáld meg később!</p>
     <?php endif; ?>
 
     <section>

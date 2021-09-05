@@ -28,7 +28,7 @@ class BruteForceChecker
         foreach ($lines as $line) {
             $line = explode(',', $line);
             if ($line[0] == $_SERVER['REMOTE_ADDR'] && (time() - $line[1]) < $this->delay) {
-                $error = 'Jelenleg nem tudsz új szavazatot leadni, kérlek próbáld meg később!';
+                $error = true;
             }
         }
         return $error;
