@@ -23,15 +23,14 @@ class BruteForceChecker
 
     public function isUserVotedInDelay(): bool
     {
-        $error = false;
         $lines = file($this->fileName);
         $lines = array_reverse($lines);
         foreach ($lines as $line) {
             $line = explode(',', $line);
             if ($line[0] == $_SERVER['REMOTE_ADDR'] && (time() - $line[1]) < $this->delay) {
-                $error = true;
+                return true;
             }
         }
-        return $error;
+        return false;
     }
 }
