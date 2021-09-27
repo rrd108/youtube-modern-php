@@ -1,9 +1,0 @@
-{
-  "question": "Melyik a kedvenc frontend JavaScript keretrendszered",
-  "answers": {
-    "Vue": 10,
-    "React": 3,
-    "Svelte": 5,
-    "jQuery": 4
-  }
-}
