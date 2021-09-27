@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: localhost
--- Létrehozás ideje: 2021. Sze 27. 09:45
+-- Létrehozás ideje: 2021. Sze 27. 09:53
 -- Kiszolgáló verziója: 10.6.4-MariaDB
 -- PHP verzió: 8.0.10
 
@@ -39,10 +39,10 @@ CREATE TABLE `answers` (
 --
 
 INSERT INTO `answers` (`id`, `question_id`, `answer`, `votes`) VALUES
-(1, 213, 'Vue', NULL),
-(2, 213, 'React', NULL),
-(3, 213, 'Svelte', NULL),
-(4, 213, 'jQuery', NULL);
+(1, 213, 'Vue', 5),
+(2, 213, 'React', 3),
+(3, 213, 'Svelte', 1),
+(4, 213, 'jQuery', 2);
 
 -- --------------------------------------------------------
 
