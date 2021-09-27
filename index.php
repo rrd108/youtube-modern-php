@@ -2,17 +2,19 @@
 declare(strict_types=1);
 
 use Rrd108\ModernPhp\BruteForceChecker;
+use Rrd108\ModernPhp\Db;
 use \Waavi\Sanitizer\Sanitizer;
 
 require './vendor/autoload.php';
 require './functions.php';
+require './config/config.php';
 
 //$dayOfYear = date('z') + 1;   // TODO amint van minden napra kérdés ezt cseréljük vissza
 $dayOfYear = 213;
-$data = json_decode(
-    file_get_contents('./' . $dayOfYear . '.json'),
-    true
-);
+
+$db = new Db($config['mysql']['host'], $config['mysql']['db'], $config['mysql']['user'], $config['mysql']['pass']);
+$data = $db->getQuestionWithAnswers($dayOfYear);
+var_dump($data);
 
 $totalVotes = array_sum($data['answers']);
 
