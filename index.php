@@ -42,18 +42,18 @@ if ($_POST['new-option']) {
 
 if ($_POST['vote']) {
     // brute force check
-    //$bruteForceChecker = new BruteForceChecker('./' . $dayOfYear . '-votes.csv');
-    //$error = $bruteForceChecker->isUserVotedInDelay();
-    //$bruteForceChecker->save();
+    $bruteForceChecker = new BruteForceChecker($db->pdo);
+    $userVoted = $bruteForceChecker->isUserVotedInDelay();
+    $bruteForceChecker->save();
 
-    //if (!$error) {
+    if (!$userVoted) {
         if (in_array($_POST['vote'], array_keys($data['answers']))) {
             // növeljük a kiválasztott választ 1-gyel
             $data['answers'][$_POST['vote']]++;
             $totalVotes++;
             $db->saveVote($data['answer_ids'][$_POST['vote']]);
         }
-    //}
+    }
     // TODO ha olyanra szavazott ami nem létezik akkor loggoljuk a választ és az IP címet és a timestampet
 }
 

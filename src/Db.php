@@ -14,6 +14,11 @@ class Db
         $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     }
 
+    public function __get($name) {
+        // TODO nullsafe
+        return $name == 'pdo' ? $this->pdo : null;
+    }
+
     public function getQuestionWithAnswers(int $dayOfYear) {
         $stmt = $this->pdo->prepare('SELECT * FROM questions 
             INNER JOIN answers 

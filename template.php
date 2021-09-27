@@ -18,7 +18,7 @@
   </header>
   <main>
     
-    <?php if ($error) : ?>
+    <?php if ($userVoted) : ?>
       <p class="error">Jelenleg nem tudsz új szavazatot leadni, kérlek próbáld meg később!</p>
     <?php endif; ?>
 
