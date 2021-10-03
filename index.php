@@ -11,7 +11,12 @@ require './config/config.php';
 //$dayOfYear = date('z') + 1;   // TODO amint van minden napra kérdés ezt cseréljük vissza
 $dayOfYear = 213;
 
-$db = new Db($config['mysql']['host'], $config['mysql']['db'], $config['mysql']['user'], $config['mysql']['pass']);
+$db = new Db(
+    host: $config['mysql']['host'],
+    dbName: $config['mysql']['db'],
+    mysqlUser: $config['mysql']['user'],
+    mysqlPass: $config['mysql']['pass'],
+);
 
 $_data = $db->getQuestionWithAnswers($dayOfYear);
 
