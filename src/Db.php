@@ -30,9 +30,9 @@ class Db
 
     public function saveNewAnswer(int $question_id, string $answer) {
         $stmt = $this->pdo->prepare('INSERT INTO answers (question_id, answer, votes) VALUES (?, ?, ?)');
+        $stmt = $this->pdo->prepare('INSERT INTO answers (question_id, answer, votes) VALUES (?, ?, 1)');
         $stmt->bindValue(1, $question_id);
         $stmt->bindValue(2, $answer);
-        $stmt->bindValue(3, 1);
         $stmt->execute();
     }
 
