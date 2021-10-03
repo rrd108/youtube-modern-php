@@ -1,9 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
-use Rrd108\ModernPhp\BruteForceChecker;
 use Rrd108\ModernPhp\Db;
 use \Waavi\Sanitizer\Sanitizer;
+use Rrd108\ModernPhp\BruteForceChecker;
 
 require './vendor/autoload.php';
 require './config/config.php';
@@ -37,7 +38,7 @@ if ($_POST['new-option']) {
      *      káromkodás szűrés
      *      hülyeség szűrő
      */
-    
+
     $sanitizer  = new Sanitizer($_POST, ['new-option' => 'trim|escape|capitalize']);
     $cleanedPost = $sanitizer->sanitize();
     $data['answers'][$cleanedPost['new-option']] = 1;
