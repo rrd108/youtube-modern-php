@@ -10,7 +10,6 @@ class Db
 
     public function __construct(string $host, string $dbName, string $mysqlUser, string $mysqlPass)
     {
-        // TODO named arguments php 8
         $this->pdo = new PDO('mysql:host=' . $host . ';dbname=' . $dbName, $mysqlUser, $mysqlPass);
         $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     }
