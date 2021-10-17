@@ -13,3 +13,5 @@ $channel = ($name == 'rrd') ? 'webmania' : null;
 
 //if (isset($_GET['search'])) {...}
 echo $search = $_GET['search'] ?: 'all';       // ha "igazi" / truely - shorthand ternary 
+
+echo $search = $_GET['search'] ?? 'all';       // ha létezik - null coalescing 
