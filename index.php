@@ -46,7 +46,6 @@ if ($_POST['new-option']) {
     /**
      * TODO lehetséges problémák
      *      bug: felülírás
-     *      káromkodás szűrés
      *      hülyeség szűrő
      */
 
