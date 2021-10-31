@@ -3,6 +3,7 @@
 namespace Rrd108\ModernPhp;
 
 use PDO;
+use BadMethodCallException;
 
 class Db
 {
@@ -29,7 +30,11 @@ class Db
             WHERE questions.id = ?'
         );
         $stmt->execute([$dayOfYear]);
-        return $stmt->fetchAll();
+        $result = $stmt->fetchAll();
+        if ($result) {
+            return $result;
+        }
+        throw new BadMethodCallException('Question not found');
     }
 
     public function saveNewAnswer(int $question_id, string $answer)

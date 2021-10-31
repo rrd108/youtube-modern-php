@@ -9,8 +9,8 @@ use Rrd108\ModernPhp\BruteForceChecker;
 require './vendor/autoload.php';
 require './config/config.php';
 
-//$dayOfYear = date('z') + 1;   // TODO amint van minden napra kérdés ezt cseréljük vissza
-$dayOfYear = 213;
+$dayOfYear = date('z') + 1;   // TODO amint van minden napra kérdés ezt cseréljük vissza
+//$dayOfYear = 213;
 
 $db = new Db(
     host: $config['mysql']['host'],
@@ -19,7 +19,12 @@ $db = new Db(
     mysqlPass: $config['mysql']['pass'],
 );
 
-$_data = $db->getQuestionWithAnswers($dayOfYear);
+try {
+    $_data = $db->getQuestionWithAnswers($dayOfYear);
+} catch (Exception $e) {
+    // handling it differently on prod and dev
+    echo $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine();
+}
 
 $data['question'] = $_data[0]['question'];
 foreach ($_data as $d) {
