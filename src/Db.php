@@ -22,10 +22,12 @@ class Db
 
     public function getQuestionWithAnswers(int $dayOfYear)
     {
-        $stmt = $this->pdo->prepare('SELECT * FROM questions 
+        $stmt = $this->pdo->prepare(
+            'SELECT * FROM questions 
             INNER JOIN answers 
             ON answers.question_id = questions.id 
-            WHERE questions.id = ?');
+            WHERE questions.id = ?'
+        );
         $stmt->execute([$dayOfYear]);
         return $stmt->fetchAll();
     }
@@ -40,9 +42,11 @@ class Db
 
     public function saveVote(int $answer_id)
     {
-        $stmt = $this->pdo->prepare('UPDATE answers 
+        $stmt = $this->pdo->prepare(
+            'UPDATE answers 
             SET votes = votes + 1
-            WHERE id = ?');
+            WHERE id = ?'
+        );
         $stmt->bindValue(1, $answer_id);
         $stmt->execute();
     }

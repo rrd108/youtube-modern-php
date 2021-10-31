@@ -7,7 +7,7 @@ class BruteForceChecker
     private int $delay;
     private \PDO $pdo;
 
-    public function __construct(\PDO $pdo, int $delay = 20*60)
+    public function __construct(\PDO $pdo, int $delay = 20 * 60)
     {
         $this->pdo = $pdo;
         $this->delay = $delay;
@@ -15,8 +15,10 @@ class BruteForceChecker
 
     public function save()
     {
-        $stmt = $this->pdo->prepare('INSERT INTO votelogs
-            (ip) VALUES (?)');
+        $stmt = $this->pdo->prepare(
+            'INSERT INTO votelogs
+            (ip) VALUES (?)'
+        );
         $stmt->bindValue(1, $_SERVER['REMOTE_ADDR']);
         $stmt->execute();
     }
