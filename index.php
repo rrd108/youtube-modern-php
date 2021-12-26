@@ -1,76 +1,46 @@
 <?php
 
-declare(strict_types=1);
-
-use Rrd108\ModernPhp\Db;
-use \Waavi\Sanitizer\Sanitizer;
-use Rrd108\ModernPhp\BruteForceChecker;
-
 require './vendor/autoload.php';
-require './config/config.php';
 
-set_exception_handler(function (Throwable $e) {
-    // TODO handling it differently on prod and dev
-    echo $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine();
-});
+$rates = [];
 
-$dayOfYear = date('z') + 1;   // TODO amint van minden napra kérdés ezt cseréljük vissza
-//$dayOfYear = 213;
-
-$db = new Db(
-    host: $config['mysql']['host'],
-    dbName: $config['mysql']['db'],
-    mysqlUser: $config['mysql']['user'],
-    mysqlPass: $config['mysql']['pass'],
-);
-
-/*try {
-    $_data = $db->getQuestionWithAnswers($dayOfYear);
-} catch (Exception $e) {
-    // handling it differently on prod and dev
-    echo $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine();
-}*/
-$_data = $db->getQuestionWithAnswers($dayOfYear);
-
-$data['question'] = $_data[0]['question'];
-foreach ($_data as $d) {
-    $data['answers'][$d['answer']] = $d['votes'];
-    $data['answer_ids'][$d['answer']] = (int) $d['id'];
-}
-unset($_data);
-
-$totalVotes = array_sum($data['answers']);
-
-// jött-e új option
-if ($_POST['new-option']) {
-    /**
-     * TODO lehetséges problémák
-     *      bug: felülírás
-     *      hülyeség szűrő
-     */
-
-    $sanitizer  = new Sanitizer($_POST, ['new-option' => 'trim|escape|capitalize']);
-    $cleanedPost = $sanitizer->sanitize();
-    $data['answers'][$cleanedPost['new-option']] = 1;
-    $totalVotes++;
-    $db->saveNewAnswer($dayOfYear, $cleanedPost['new-option']);
-}
-
-if ($_POST['vote']) {
-    // brute force check
-    $bruteForceChecker = new BruteForceChecker($db->pdo);
-    $userVoted = $bruteForceChecker->isUserVotedInDelay();
-    $bruteForceChecker->save();
-
-    if (!$userVoted) {
-        if (in_array($_POST['vote'], array_keys($data['answers']))) {
-            // növeljük a kiválasztott választ 1-gyel
-            $data['answers'][$_POST['vote']]++;
-            $totalVotes++;
-            $db->saveVote($data['answer_ids'][$_POST['vote']]);
-        }
+if (($handle = fopen('./data.csv', 'r')) !== false) {
+    while (($data = fgetcsv($handle, 1000, ',')) !== false) {
+        $rates[] = ['y' => $data[1], 'label' => $data[0]];
     }
-    // TODO ha olyanra szavazott ami nem létezik akkor loggoljuk a választ és az IP címet és a timestampet
+    fclose($handle);
 }
+?>
+<!DOCTYPE html>
+<html lang="en">
 
-require './template.php';
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETH/HUF rates</title>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js" defer></script>
+    <script>
+        window.onload = function() {
+            let chart = new CanvasJS.Chart("chartContainer", {
+                title: {
+                    text: "ETH/HUF rates"
+                },
+                axisY: {
+                    title: "HUF"
+                },
+                data: [{
+                    type: "line",
+                    dataPoints: <?php echo json_encode($rates, JSON_NUMERIC_CHECK); ?>
+                }]
+            });
+            chart.render();
+        }
+    </script>
+</head>
+
+<body>
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+</body>
+
+</html>
